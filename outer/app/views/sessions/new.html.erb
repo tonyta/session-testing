@@ -1,6 +1,6 @@
 <div>old msg: <%= msg.inspect %></div>
 <%= form_with url: "/sessions" do |form| %>
   <%= form.label :msg, "new msg:" %>
-  <%= form.text_field :msg %>
+  <%= form.text_field :msg, autofocus: true %>
   <%= form.submit "Submit" %>
 <% end %>
