@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    session[:msg] = params.require(:msg)
+    session[:msg] = params[:msg].presence
     redirect_to sessions_path
   end
 
