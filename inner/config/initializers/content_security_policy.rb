@@ -6,7 +6,7 @@
 
 Rails.application.configure do
   config.content_security_policy do |policy|
-    policy.frame_ancestors :self, "https://outer.tonyta.dev"
+    policy.frame_ancestors :self, "https://outer.tonyta.dev", "http://outerhost:3000"
   end
 #
 #   # Generate session nonces for permitted importmap and inline scripts

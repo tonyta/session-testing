@@ -22,8 +22,15 @@ module Outer
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.hosts << "outer.tonyta.dev"
-    config.force_ssl = true
+
+    if ENV["TUNNEL"]
+      config.hosts << "outer.tonyta.dev"
+      config.force_ssl = true
+    else
+      config.hosts << "outerhost"
+    end
+
+    config.session_store :cookie_store, key: 'session_id'
 
     # Configuration for the application, engines, and railties goes here.
     #

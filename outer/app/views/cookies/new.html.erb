@@ -1,0 +1,37 @@
+<div>
+  <h3>Cookies:</h3>
+  <ul>
+  <% cookies.each do |key, _| %>
+    <li><%= key %>
+  <% end %>
+  </ul>
+</div>
+
+<%= form_with url: "/cookies" do |form| %>
+  <div>
+    <%= form.label :key, "key:" %>
+    <%= form.text_field :key %>
+  </div>
+
+  <div>
+    <%= form.label :secure, "Secure:" %>
+    <%= form.check_box :secure %>
+  </div>
+
+  <div>
+    <%= form.label :httponly, "HttpOnly:" %>
+    <%= form.check_box :httponly %>
+  </div>
+
+  <div>
+    <%= form.label :same_site, "SameSite:" %>
+    <%= form.radio_button :same_site, "None", checked: true %>
+    <%= form.label :same_site_none, "none" %>
+    <%= form.radio_button :same_site, "Lax" %>
+    <%= form.label :same_site_lax, "lax" %>
+    <%= form.radio_button :same_site, "Strict" %>
+    <%= form.label :same_site_strict, "strict" %>
+  </div>
+
+  <%= form.submit "create cookie" %>
+<% end %>

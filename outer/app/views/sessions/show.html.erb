@@ -1,3 +1,14 @@
+<div>
+  <h3>Cookies:</h3>
+  <ul>
+  <% cookies.each do |key, _| %>
+    <li><%= key %>
+  <% end %>
+  </ul>
+</div>
+
 <div>msg: <%= msg.inspect %></div>
 <%= button_to "set new msg", new_sessions_path, method: "get" %>
+<%= button_to "set cookie", new_cookies_path, method: "get" %>
+<%= button_to "clear cookies", cookies_path, method: "delete" %>
 <%= button_to "reset session", sessions_path, method: "delete" %>

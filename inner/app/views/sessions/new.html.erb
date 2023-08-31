@@ -1,6 +1,15 @@
+<div>
+  <h3>Cookies:</h3>
+  <ul>
+  <% cookies.each do |key, _| %>
+    <li><%= key %>
+  <% end %>
+  </ul>
+</div>
+
 <div>old msg: <%= msg.inspect %></div>
 <%= form_with url: "/sessions" do |form| %>
   <%= form.label :msg, "new msg:" %>
-  <%= form.text_field :msg, autofocus: true %>
+  <%= form.text_field :msg %>
   <%= form.submit "Submit" %>
 <% end %>
