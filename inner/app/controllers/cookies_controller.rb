@@ -1,4 +1,9 @@
 class CookiesController < ApplicationController
+  #
+  # Allow cross-site POST
+  #
+  skip_forgery_protection only: :create
+
   def new
     render locals: { cookies: cookies.to_hash.except("session_id") }
   end
@@ -11,7 +16,7 @@ class CookiesController < ApplicationController
     cookie_data[:same_site] = params[:same_site]
     cookies[params.require(:key)] = cookie_data
 
-    redirect_to sessions_path
+    redirect_to params[:redirect_url] || sessions_path, allow_other_host: true
   end
 
   def destroy

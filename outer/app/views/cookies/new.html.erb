@@ -7,7 +7,7 @@
   </ul>
 </div>
 
-<%= form_with url: "/cookies" do |form| %>
+<%= form_with url: target_url do |form| %>
   <div>
     <%= form.label :key, "key:" %>
     <%= form.text_field :key %>
@@ -31,6 +31,7 @@
     <%= form.label :same_site_lax, "lax" %>
     <%= form.radio_button :same_site, "Strict" %>
     <%= form.label :same_site_strict, "strict" %>
+    <%= form.hidden_field :redirect_url, value: redirect_url %>
   </div>
 
   <%= form.submit "create cookie" %>

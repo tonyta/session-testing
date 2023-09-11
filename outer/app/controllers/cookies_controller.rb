@@ -1,6 +1,24 @@
 class CookiesController < ApplicationController
   def new
-    render locals: { cookies: cookies.to_hash.except("session_id") }
+    render locals: {
+      target_url: "/cookies",
+      redirect_url: nil,
+      cookies: cookies.to_hash.except("session_id"),
+    }
+  end
+
+  def new_third_party
+    target_url = if ENV["TUNNEL"] || ENV["IFRAME_TUNNEL"]
+      "https://inner.tonyta.dev/cookies"
+    else
+      "http://innerhost:5101/cookies"
+    end
+
+    render :new, locals: {
+      target_url: target_url,
+      redirect_url: sessions_url,
+      cookies: cookies.to_hash.except("session_id"),
+    }
   end
 
   def create
