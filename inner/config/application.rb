@@ -18,6 +18,30 @@ require "action_view/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+class ChipsMiddelware
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    @app.call(env).tap do |status, headers, body|
+      enable_chips! headers
+    end
+  end
+
+  private
+
+  def enable_chips!(headers)
+    if cookies = headers["Set-Cookie"]
+      cookies = cookies.split("\n")
+
+      headers["Set-Cookie"] = cookies.map { |cookie|
+        "#{cookie}; Partitioned"
+      }.join("\n")
+    end
+  end
+end
+
 module Inner
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -34,6 +58,7 @@ module Inner
       config.hosts << "innerhost"
     end
 
+    config.middleware.insert_before 0, ChipsMiddelware if ENV["ENABLE_CHIPS"]
     config.session_store :cookie_store, key: 'session_id', secure: true, same_site: :none
 
     # Configuration for the application, engines, and railties goes here.
