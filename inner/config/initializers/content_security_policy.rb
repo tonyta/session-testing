@@ -6,7 +6,12 @@
 
 Rails.application.configure do
   config.content_security_policy do |policy|
-    policy.frame_ancestors :self, "https://outer.tonyta.dev", "http://outerhost:3000"
+    policy.frame_ancestors *[
+      :self,
+      "https://outer.tonyta.org",
+      "https://outer.tonyta.dev",
+      "http://outerhost:5100",
+    ]
     # policy.frame_ancestors "*"
     # policy.frame_ancestors "*.tonyta.dev"
   end

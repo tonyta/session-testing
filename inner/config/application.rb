@@ -25,6 +25,7 @@ module Inner
 
     if ENV["TUNNEL"]
       config.hosts << "inner.tonyta.dev"
+      config.hosts << "inner.tonyta.org"
       config.force_ssl = true
 
       # Do not automatically set cookies as secure when using HTTPS
