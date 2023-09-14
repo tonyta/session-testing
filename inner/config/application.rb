@@ -34,7 +34,7 @@ module Inner
       config.hosts << "innerhost"
     end
 
-    config.session_store :cookie_store, key: 'session_id'
+    config.session_store :cookie_store, key: 'session_id', secure: true, same_site: :none
 
     # Configuration for the application, engines, and railties goes here.
     #
