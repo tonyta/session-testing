@@ -10,5 +10,22 @@
   <body>
     <h1>Inner</h1>
     <%= yield %>
+
+    <%= javascript_tag nonce: true do -%>
+      function makeRequestWithUserGesture() {
+        var promise = document.requestStorageAccess();
+        promise.then(
+          function () {
+            console.log("access granted");
+          },
+          function () {
+            console.log("access denied");
+          }
+        );
+      }
+      makeRequestWithUserGesture();
+    <% end -%>
+
+    <button onclick="makeRequestWithUserGesture()">requestStorageAccess</button>
   </body>
 </html>
